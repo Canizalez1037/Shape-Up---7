@@ -1,0 +1,260 @@
+/* Shape Up 6-1 - fluid two-column flexbox layout */
+
+/* Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    background-color: white;
+}
+
+body {
+    width: 100%;
+    margin: 0;
+    border: none;
+    box-shadow: none;
+    background-color: white;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: clamp(14px, 1.2vw, 18px);
+}
+
+/* Header */
+header {
+    min-height: 8em;
+    padding: clamp(1em, 2.5vw, 2em) clamp(1em, 4vw, 3em);
+    border-bottom: 3px solid steelblue;
+    background-image: linear-gradient(to bottom, white 0%, lightsteelblue 100%);
+    overflow: auto;
+}
+
+header img {
+    float: left;
+    width: 12vw;
+    min-width: 100px;
+    max-width: 120px;
+    height: auto;
+    margin-right: clamp(1em, 2.5vw, 2em);
+}
+
+header h1 {
+    padding-top: 0.15em;
+    color: steelblue;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-style: italic;
+}
+
+header h2 {
+    margin-top: 0.25em;
+    font-size: clamp(1.15rem, 2.3vw, 1.6rem);
+}
+
+/* Fluid two-column layout */
+main {
+    clear: both;
+    display: flex;
+    align-items: flex-start;
+    gap: clamp(1rem, 3vw, 2.5rem);
+    width: 100%;
+    padding: clamp(1.25em, 3vw, 2.5em) clamp(1em, 4vw, 3em);
+}
+
+section {
+    flex: 1 1 72%;
+    min-width: 0;
+}
+
+.resources {
+    flex: 0 1 28%;
+    min-width: 240px;
+    margin: 0;
+    padding: clamp(0.9em, 2vw, 1.25em);
+    border: 3px solid steelblue;
+    border-radius: 12px;
+}
+
+section h2 {
+    margin: 0.75em 0 0.5em;
+    font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+}
+
+section h2:first-child {
+    margin-top: 0;
+}
+
+section h3 {
+    margin: 0.85em 0 0.25em;
+    font-size: clamp(1rem, 1.6vw, 1.25rem);
+}
+
+p {
+    margin-bottom: 0.75em;
+    line-height: 1.45;
+}
+
+blockquote {
+    margin: 0.5em clamp(1em, 3vw, 2em) 1em;
+    line-height: 1.45;
+}
+
+a {
+    font-weight: bold;
+}
+
+section a:link,
+section a:visited {
+    color: maroon;
+}
+
+section a:hover,
+section a:focus {
+    color: steelblue;
+}
+
+.resources h2 {
+    margin-bottom: 0.5em;
+    color: maroon;
+    font-size: clamp(1.2rem, 2vw, 1.5rem);
+}
+
+.resources ul {
+    margin-left: 1.5em;
+}
+
+.resources li {
+    margin-bottom: 0.25em;
+    line-height: 1.5;
+}
+
+.resources a:link,
+.resources a:visited {
+    color: steelblue;
+}
+
+.resources a:hover,
+.resources a:focus {
+    color: maroon;
+}
+
+footer {
+    padding: 1em 0;
+    background-color: steelblue;
+    color: white;
+}
+
+footer p {
+    margin: 0;
+    font-size: clamp(0.8rem, 1.1vw, 0.95rem);
+    text-align: center;
+}
+
+/* Keep the fluid layout readable on narrow screens */
+@media screen and (max-width: 700px) {
+    main {
+        flex-direction: column;
+    }
+
+    section,
+    .resources {
+        width: 100%;
+        min-width: 0;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    header img {
+        float: none;
+        display: block;
+        margin: 0 auto 0.75em;
+    }
+
+    header h1,
+    header h2 {
+        text-align: center;
+    }
+}
+
+/* Shape Up 7: two-tier responsive navigation */
+.navbar {
+    position: relative;
+    z-index: 10;
+    background-color: steelblue;
+}
+.navbar .menu {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: stretch;
+    list-style: none;
+    margin: 0;
+    padding: 0.35rem;
+}
+.navbar .menu > li {
+    position: relative;
+    flex: 1 1 auto;
+    min-width: max-content;
+}
+.navbar a {
+    display: block;
+    padding: 0.75em 1em;
+    color: white;
+    font-weight: normal;
+    text-align: center;
+    text-decoration: none;
+    border: 2px solid transparent;
+    border-radius: 0.6em;
+}
+.navbar a:visited { color: white; }
+.navbar a:hover,
+.navbar a:focus-visible {
+    background: #315b7e;
+    text-decoration: underline;
+    outline: 2px solid white;
+    outline-offset: -4px;
+}
+.navbar a.current,
+.navbar a.current:visited,
+.navbar a.current:hover,
+.navbar a.current:focus-visible {
+    border: 2px solid white;
+    background: steelblue;
+    font-weight: bold;
+    text-decoration: none;
+}
+.navbar .submenu {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    z-index: 30;
+    list-style: none;
+    margin: 0;
+    padding: 0.25em;
+    min-width: 100%;
+    width: max-content;
+    max-width: min(90vw, 22rem);
+    background-color: steelblue;
+    box-shadow: 0 4px 8px rgba(0,0,0,.2);
+}
+.navbar .submenu a {
+    text-align: left;
+    white-space: normal;
+}
+.navbar .has-submenu:hover > .submenu,
+.navbar .has-submenu:focus-within > .submenu {
+    display: block;
+}
+@media (max-width: 540px) {
+    .navbar .menu > li {
+        min-width: 45%;
+    }
+    .navbar .submenu {
+        width: max-content;
+        min-width: 100%;
+    }
+    .navbar .menu > li:last-child .submenu {
+        left: auto;
+        right: 0;
+    }
+}
